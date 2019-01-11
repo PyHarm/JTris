@@ -1,10 +1,12 @@
-var ctx = document.querySelector("canvas");
-ctx.width = window.innerWidth/10*3 - 20;
-ctx.height = window.innerHeight - 20;
-var canv = ctx.getContext("2d");
+var canvas = document.querySelector("canvas");
 
-var width = ctx.width;
-var height = ctx.height;
+var ctx = canvas.getContext("2d");
+
+ctx.rect(0,0,20,20);
+
+canvas.width = 420;
+canvas.height = 650;
+
 
 function setup(){
     requestAnimationFrame(main); 
@@ -17,12 +19,12 @@ function main(){
 }
 
 function update(){
-    console.log(width);
+
 }
 
 function draw(){
-    canv.fillStyle = "rgb(255,255,0)";
-    canv.fillRect(0,0,200,200);
+    ctx.fillStyle = 'rgb(255,255,0)';
+    ctx.fillRect(0,0,255,255);
 }
 
 setup();

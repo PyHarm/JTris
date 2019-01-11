@@ -1,56 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --canvasWidth: 420px;
+    --canvasHeight: 650px;
+}
 body{
-    background-color: rgb(36, 36, 36);
+    position: relative;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    background-color: #56657c;
+    height: 100vh;
+    width: 100vw;
 }
-
-html, body{
-    min-height: 100% !important;
-    height: 100%;
-    margin: 0px;
-    overflow: hidden;
-}
-
-canvas{
-    display: block;
-}
-
-#GUI{
-    height: 100%;
-}
-
-#gameCanv{
-    width: 30%;
-}
-
-#scoreboard{
-    width: 25%;
-}
-
-#tetrismenu{
-    width: 25%;
-}
-
-#scoreboard > div{
-    text-align: center;
-    font-size: 30px;
-    font-family: 'Segoe UI';
-    color: white;
-    border-radius: 30px;
-    background-color: rgb(26, 27, 25);
-    margin: 25px;
-}
-
-#tetrismenu > div{
-    text-align: center;
-    font-size: 30px;
-    font-family: 'Segoe UI';
-    color: white;
-    border-radius: 30px;
-    background-color: rgb(26, 27, 25);
-    margin: 25px;
-}
-
-#gameCanv > div{
-    margin: 10px;
-    border-radius: 30px;
-    background-color: rgb(26, 27, 25);
+body canvas{
+    width: var(--canvasWidth);
+    height: var(--canvasHeight);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 3px #000;
 }
