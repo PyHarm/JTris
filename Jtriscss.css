@@ -1,8 +1,55 @@
+body{
+    background-color: rgb(36, 36, 36);
+}
+
+html, body{
+    min-height: 100% !important;
+    height: 100%;
+    margin: 0px;
+    overflow: hidden;
+}
+
 canvas{
-    background-color: rgb(26, 27, 25);
     display: block;
 }
 
-body{
-    margin: 0px;
+#GUI{
+    height: 100%;
+}
+
+#gameCanv{
+    width: 30%;
+}
+
+#scoreboard{
+    width: 25%;
+}
+
+#tetrismenu{
+    width: 25%;
+}
+
+#scoreboard > div{
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Segoe UI';
+    color: white;
+    border-radius: 30px;
+    background-color: rgb(26, 27, 25);
+    margin: 25px;
+}
+
+#tetrismenu > div{
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Segoe UI';
+    color: white;
+    border-radius: 30px;
+    background-color: rgb(26, 27, 25);
+    margin: 25px;
+}
+
+#gameCanv > div{
+    margin: 10px;
+    background-color: rgb(26, 27, 25);
 }
