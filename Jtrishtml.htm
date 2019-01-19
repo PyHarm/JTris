@@ -8,7 +8,30 @@
     <title>Tetris</title>
 </head>
 <body>
-    <canvas id="canv"></canvas>
+    <table id="GUI">
+        <tr>
+            <td id="scoreboard">
+                <div>
+                    <div class="sbitem header">Controls</div>
+                    <div class="sbitem">W or up to rotate</div>
+                    <div class="sbitem">A or left to go left</div>
+                    <div class="sbitem">S or down to fall down faster</div>
+                    <div class="sbitem">D or right to go right</div>
+                </div>
+            </td>
+            <td id="gameCanv">
+                <div><canvas></canvas></div>
+            </td>
+            <td id="tetrismenu">
+                <div class="menu">
+                    <div class="menuitem"></div>
+                    <div class="menuitem">Highscore: </div>
+                    <div class="menuitem" id="scoreDiv">Score: </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
     <script src="Jtrisjs.js"></script>
 </body>
 </html>
