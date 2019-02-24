@@ -7,7 +7,7 @@ var width = ctx.width;
 var height = ctx.height;
 
 var currentTile;
-var placedSQ = [];
+var placedSQ;
 var scoreDiv = document.getElementById('scoreDiv');
 var score = 0;
 scoreDiv.innerText = "Score: " + score;
@@ -36,40 +36,50 @@ class Tile{
         this.colors = ["#00f0f0", "#0000f0", "#f0a000", "#f0f000", "#00f000", "#a000f0", "#f00000"];
         this.types = [[[[0, 0],[0, this.width],[0, this.width*2],[0, this.width*3],"#00f0f0"],
                        [[0, 0],[this.width, 0],[this.width*2, 0],[this.width*3, 0],"#00f0f0"],
-                       [[0, 0],[0, this.width],[0, this.width*2],[0, this.width*3],"#00f0f0"],
-                       [[0, 0],[this.width, 0],[this.width*2, 0],[this.width*3, 0],"#00f0f0"]],
+                       [[0, 0],[0, -this.width],[0, -this.width*2],[0, -this.width*3],"#00f0f0"],
+                       [[0, 0],[-this.width, 0],[-this.width*2, 0],[-this.width*3, 0],"#00f0f0"]],
 
                       [[[0, 0],[0, this.width],[this.width, 0],[this.width, this.width],"#0000f0"],
                        [[0, 0],[0, this.width],[this.width, 0],[this.width, this.width],"#0000f0"],
                        [[0, 0],[0, this.width],[this.width, 0],[this.width, this.width],"#0000f0"],
                        [[0, 0],[0, this.width],[this.width, 0],[this.width, this.width],"#0000f0"]],
 
-                      [[[0, 0],[0, this.width],[0, this.width*2],[this.width, this.width*2],"#f0a000"],
-                       [[0, 0],[this.width, 0],[this.width*2, 0],[0, -this.width],"#f0a000"],
-                       [[0, 0],[0, this.width],[0, this.width*2],[-this.width, this.width*2],"#f0a000"],
-                       [[0, 0],[this.width, 0],[this.width*2, 0],[this.width*2, this.width],"#f0a000"]],
+                      [[[0, 0],[0, -this.width],[this.width, 0],[this.width*2, 0],"#f0a000"],
+                       [[0, 0],[-this.width, 0],[0, -this.width],[0, -this.width*2],"#f0a000"],
+                       [[0, 0],[0, this.width],[-this.width, 0],[-this.width*2, 0],"#f0a000"],
+                       [[0, 0],[this.width, 0],[0, this.width],[0, this.width*2],"#f0a000"]],
 
-                      [[[0, 0],[0, this.width],[this.width, this.width],[this.width, this.width*2],"#f0f000"],
-                       [[0, 0],[this.width, 0],[this.width, -this.width],[this.width*2, -this.width],"#f0f000"],
-                       [[0, 0],[0, this.width],[this.width, this.width],[this.width, this.width*2],"#f0f000"],
-                       [[0, 0],[this.width, 0],[this.width, -this.width],[this.width*2, -this.width],"#f0f000"]],
+                      [[[0, 0],[-this.width, 0],[-this.width*2, 0],[0, -this.width],"#a000f0"],
+                       [[0, 0],[-this.width, 0],[0, this.width],[0, this.width*2],"#a000f0"],
+                       [[0, 0],[this.width, 0],[this.width*2, 0],[0, this.width],"#a000f0"],
+                       [[0, 0],[this.width, 0],[0, -this.width],[0, -this.width*2],"#a000f0"]],
 
-                      [[[0, 0],[0, this.width],[0, this.width*2],[this.width, this.width],"#00f000"],
-                       [[0, 0],[this.width, 0],[this.width*2, 0],[this.width, -this.width],"#00f000"],
-                       [[0, 0],[0, this.width],[0, this.width*2],[-this.width, this.width],"#00f000"],
-                       [[0, 0],[this.width, 0],[this.width*2, 0],[this.width, this.width],"#00f000"]],
+                      [[[0, 0],[this.width, 0],[this.width, -this.width],[this.width*2, -this.width],"#f0f000"],
+                       [[0, 0],[0, -this.width],[-this.width, -this.width],[-this.width, -this.width*2],"#f0f000"],
+                       [[0, 0],[-this.width, 0],[-this.width, this.width],[-this.width*2, this.width],"#f0f000"],
+                       [[0, 0],[0, this.width],[this.width, this.width],[this.width, this.width*2],"#f0f000"]],
+
+                      [[[0, 0],[-this.width, 0],[-this.width, -this.width],[-this.width*2, -this.width],"#f00000"],
+                       [[0, 0],[0, this.width],[-this.width, this.width],[-this.width, this.width*2],"#f00000"],
+                       [[0, 0],[this.width, 0],[this.width, this.width],[this.width*2, this.width],"#f00000"],
+                       [[0, 0],[0, -this.width],[this.width, -this.width],[this.width, -this.width*2],"#f00000"]],
+
+                      [[[0, 0],[-this.width, 0],[this.width, 0],[0, -this.width],"#00f000"],
+                       [[0, 0],[-this.width, 0],[0, -this.width],[0, this.width],"#00f000"],
+                       [[0, 0],[-this.width, 0],[this.width, 0],[0, this.width],"#00f000"],
+                       [[0, 0],[this.width, 0],[0, -this.width],[0, this.width],"#00f000"]],
                     ];
 
         this.x = width/2;
         this.y = -28*4;
         this.speed = 28;
-        this.framerate = 20;
+        this.framerate = 9;
         this.falling = false;
         this.placed = false;
         this.leftTouch = false;
         this.rightTouch = false;
         this.rotation = 0;
-        this.piecetype = Math.floor(Math.random()*5);
+        this.piecetype = Math.floor(Math.random()*7);
         this.type = this.types[this.piecetype][this.rotation];
         this.structure = [];
 
@@ -86,12 +96,12 @@ class Tile{
     }
 
     move(){
-        this.vColision();
         if(this.counter > this.framerate && this.placed == false){
             this.counter = 0;
             this.y += this.speed;
             this.reload();
         }
+        this.vColision();
     }
 
     reload(){
@@ -218,6 +228,14 @@ function lookForRows(){
     }
 }
 
+function iflose(){
+    placedSQ.forEach(sq => {
+        if(sq.y <= 0){
+            window.location.replace(window.location.pathname + window.location.search + window.location.hash);
+        }
+    });
+}
+
 function newSQ(index){
     var temp = [];
     placedSQ.forEach(sq => {
@@ -230,8 +248,11 @@ function newSQ(index){
 }
 
 function setup(){
-    requestAnimationFrame(main);
+    placedSQ = [];
     currentTile = new Tile();
+    score = 0;
+    scoreDiv.innerText = "Score: " + score;
+    requestAnimationFrame(main);
 }
 
 function main(){
@@ -242,6 +263,7 @@ function main(){
 
 function update(){
     lookForRows();
+    iflose();
     if(currentTile.placed){
         currentTile.structure.forEach(square => {
             placedSQ.push(square);
